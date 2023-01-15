@@ -1,6 +1,6 @@
 #include <WebServer.h>
 #include <ArduinoJson.h>
-#include <Servo.h>
+#include "ButtonController.h"
 
 //
 // MARK: WIFI
@@ -32,8 +32,8 @@ void setupRouting() {
   server.on("/hello", getHelloWorld);
   server.on("/ledon", getLedOn);
   server.on("/ledoff", getLedOff);
-  server.on("/tapbutton", getServo);
-  server.on("/getGap", getGap);
+  server.on("/tapButton", tapButton);
+  server.on("/makeGap", makeGap);
 }
 
 void setupServer() {
@@ -103,37 +103,4 @@ void getLedOff() {
   digitalWrite(LED, LOW);
 }
 
-//
-// MARK: SERVO
-//
 
-Servo servo;
-
-bool ignoreApi = false;
-
-void setupServo() {
-  servo.attach(13);
-}
-
-void getServo() {
-  runServoStep();
-}
-
-void getGap() {
-    runServoStep();
-  delay(1000);
-  
-  runServoStep();
-  delay(4000);
-  runServoStep();
-  delay(1000);
-  runServoStep();
-  delay(2000);
-  runServoStep();
-}
-
-void runServoStep() {
-  servo.write(30);
-  delay(500);
-  servo.write(0);
-}
