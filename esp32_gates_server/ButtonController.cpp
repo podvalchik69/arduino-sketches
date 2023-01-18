@@ -10,8 +10,6 @@
 
 Servo servo;
 
-//bool ignoreApi = true;
-
 std::mutex m;
 
 void setupServo()
@@ -31,6 +29,7 @@ void runServoStep()
 
 void tapButton()
 {
+  Serial.println("Run Run");
   runServoStep();
 }
 
