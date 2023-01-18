@@ -22,18 +22,11 @@ void setupServo()
 void runServoStep()
 {
   std::lock_guard<std::mutex> lg(m);
-  Serial.println("Before ignore api");
- // if (ignoreApi)
-  //{
-   // ignoreApi = false;
-    Serial.println("Run Button");
-    //sleep(5);
-    servo.write(30);
-    delay(500);
-    servo.write(0);
-    delay(500);
-  //  ignoreApi = true;
- // }
+  Serial.println("Run Button");
+  servo.write(30);
+  delay(500);
+  servo.write(0);
+  delay(500);
 }
 
 void tapButton()
