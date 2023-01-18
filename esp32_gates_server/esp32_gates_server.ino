@@ -35,7 +35,7 @@ void setupRouting()
   server.on("/hello", getHelloWorld);
   server.on("/ledon", getLedOn);
   server.on("/ledoff", getLedOff);
-  server.on("/tapButton", tapButton);
+  server.on("/tapButton", tapButtonImpl);
   server.on("/makeGap", makeGap);
 }
 
@@ -81,6 +81,13 @@ void getHelloWorld()
   Serial.println("Hello World");
   createJson("hello", 69, "°C");
   server.send(200, "application/json", buffer);
+}
+
+void tapButtonImpl()
+{
+  createJson("Done", 200, "OK");
+  server.send(200, "application/json", buffer);
+  tapButton();
 }
 
 //
