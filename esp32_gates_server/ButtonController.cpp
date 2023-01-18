@@ -1,6 +1,8 @@
 #include "ButtonController.h"
 
 #include <Servo.h>
+#include <mutex>
+#include <unistd.h>
 
 //
 // MARK: SERVO
@@ -8,23 +10,39 @@
 
 Servo servo;
 
-bool ignoreApi = false;
+//bool ignoreApi = true;
 
-void setupServo() {
+std::mutex m;
+
+void setupServo()
+{
   servo.attach(13);
 }
 
-void runServoStep() {
-  servo.write(30);
-  delay(500);
-  servo.write(0);
+void runServoStep()
+{
+  std::lock_guard<std::mutex> lg(m);
+  Serial.println("Before ignore api");
+ // if (ignoreApi)
+  //{
+   // ignoreApi = false;
+    Serial.println("Run Button");
+    //sleep(5);
+    servo.write(30);
+    delay(500);
+    servo.write(0);
+    delay(500);
+  //  ignoreApi = true;
+ // }
 }
 
-void tapButton() {
+void tapButton()
+{
   runServoStep();
 }
 
-void makeGap() {
+void makeGap()
+{
   runServoStep();
   delay(1000);
 
