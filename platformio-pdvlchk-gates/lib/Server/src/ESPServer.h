@@ -12,7 +12,8 @@ public:
     void connectWifi(const char *ssid, const char *pswd);
     void addRoute(const Uri &uri, WebServer::THandlerFunction fn);
     void start();
-    void createJson(char *tag, float value, char *unit);
+    void run();
+    void sendResponse(char *status, char description[]);
 
 private:
 };

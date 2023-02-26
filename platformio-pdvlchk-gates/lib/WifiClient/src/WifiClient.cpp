@@ -15,5 +15,5 @@ void WifiClient::connect(const char *ssid,const char *pswd)
 
   Serial.println("Connected!");
   Serial.println("IP Address: ");
-  Serial.print(WiFi.localIP());
+  Serial.println(WiFi.localIP());
 }

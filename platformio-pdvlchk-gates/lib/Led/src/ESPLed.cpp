@@ -1,32 +1,30 @@
-#include <Arduino.h>
+#include "ESPLed.h"
 
-//
 // MARK: LED (Мигаем встроенным светодиодом на ESP32)
-//
 const int LED = 2;
 
-void runLedLoop()
-{
-    delay(1000);
-    digitalWrite(LED, HIGH);
-    delay(1000);
-    digitalWrite(LED, LOW);
-}
-
-void getLedOn()
+void ESPLed::getOn()
 {
     Serial.println("Get Led On");
     digitalWrite(LED, HIGH);
 }
 
-void getLedOff()
+void ESPLed::getOff()
 {
     Serial.println("Get Led Off");
     digitalWrite(LED, LOW);
 }
 
-void setupLed()
+void ESPLed::runLoop()
+{
+    delay(1000);
+    getOn();
+    delay(1000);
+    getOff();
+}
+
+void ESPLed::setup()
 {
     pinMode(LED, OUTPUT);
-    runLedLoop();
+    runLoop();
 }
